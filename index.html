@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Bhaiya! 🎂</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'dancing': ['Dancing Script', 'cursive'],
+                        'poppins': ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        'gold': '#FFD700',
+                        'royal': '#4169E1',
+                        'festive': '#FF6B6B',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-poppins bg-black text-white overflow-x-hidden">
+    
+    <!-- Space Background -->
+    <div id="space-bg" class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <!-- Stars Layer -->
+        <div id="stars-layer" class="absolute inset-0"></div>
+        <!-- Twinkling Stars -->
+        <div id="twinkle-stars" class="absolute inset-0"></div>
+        <!-- Milky Way -->
+        <div id="milky-way" class="absolute inset-0"></div>
+        <!-- Planets -->
+        <div id="planets" class="absolute inset-0">
+            <!-- Moon -->
+            <div class="moon"></div>
+            <!-- Saturn -->
+            <div class="saturn"></div>
+            <!-- Mars -->
+            <div class="mars"></div>
+            <!-- Jupiter -->
+            <div class="jupiter"></div>
+            <!-- Neptune -->
+            <div class="neptune"></div>
+        </div>
+        <!-- Shooting Stars -->
+        <div id="shooting-stars"></div>
+        <!-- Astronauts -->
+        <div id="astronauts">
+            <div class="astronaut astronaut-1">👨‍🚀</div>
+            <div class="astronaut astronaut-2">🧑‍🚀</div>
+            <div class="astronaut astronaut-3">👩‍🚀</div>
+        </div>
+        <!-- Nebula Effects -->
+        <div class="nebula nebula-1"></div>
+        <div class="nebula nebula-2"></div>
+        <!-- Floating Space Objects -->
+        <div class="space-object rocket">🚀</div>
+        <div class="space-object satellite">🛰️</div>
+        <div class="space-object ufo">🛸</div>
+        <div class="space-object comet">☄️</div>
+    </div>
+    
+    <!-- Confetti Canvas -->
+    <canvas id="confetti-canvas" class="fixed inset-0 pointer-events-none z-50"></canvas>
+
+    <!-- Music Toggle (floating) -->
+    <button id="music-toggle" class="fixed top-6 right-6 z-40 text-2xl hover:scale-110 transition-transform bg-black/30 backdrop-blur-md p-3 rounded-full">🎵</button>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden">
+        <!-- 3D Floating Elements -->
+        <div class="absolute inset-0 perspective-1000">
+            <div class="floating-balloon absolute top-20 left-10 text-6xl" style="animation-delay: 0s;">🎈</div>
+            <div class="floating-balloon absolute top-40 right-20 text-5xl" style="animation-delay: 0.5s;">🎈</div>
+            <div class="floating-balloon absolute bottom-40 left-1/4 text-7xl" style="animation-delay: 1s;">🎁</div>
+            <div class="floating-balloon absolute top-1/3 right-1/3 text-4xl" style="animation-delay: 1.5s;">🎊</div>
+            <div class="floating-balloon absolute bottom-20 right-10 text-6xl" style="animation-delay: 2s;">🎉</div>
+            <div class="floating-star absolute top-1/4 left-1/3 text-3xl">⭐</div>
+            <div class="floating-star absolute bottom-1/3 right-1/4 text-4xl" style="animation-delay: 1s;">✨</div>
+        </div>
+
+        <div class="text-center z-10 px-4">
+            <div class="cake-3d mb-8" data-aos="zoom-in" data-aos-duration="1500">
+                <div class="text-9xl animate-bounce-slow">🎂</div>
+            </div>
+            <h1 class="font-dancing text-6xl md:text-8xl text-gold mb-6 animate-glow" data-aos="fade-up" data-aos-delay="500">
+                Happy Birthday
+            </h1>
+            <h2 class="text-4xl md:text-6xl font-bold mb-4 typing-effect" data-aos="fade-up" data-aos-delay="800">
+                Dear <span class="text-festive">Bhaiya!</span>
+            </h2>
+            <p class="text-xl md:text-2xl text-gray-300 mb-8" data-aos="fade-up" data-aos-delay="1100">
+                A journey through our beautiful memories together 💖
+            </p>
+            <a href="#timeline" class="inline-block px-8 py-4 bg-gradient-to-r from-gold to-yellow-500 text-black font-bold rounded-full transform hover:scale-110 transition-all duration-300 shadow-lg hover:shadow-gold/50" data-aos="fade-up" data-aos-delay="1400">
+                Start the Journey ↓
+            </a>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <div class="w-8 h-12 border-2 border-white rounded-full flex justify-center">
+                <div class="w-2 h-3 bg-white rounded-full mt-2 animate-scroll"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section id="timeline" class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <h2 class="font-dancing text-5xl md:text-6xl text-center text-gold mb-16" data-aos="fade-up">
+                Memory Lane 📸
+            </h2>
+            
+            <div class="timeline-container relative">
+                <!-- Timeline Line -->
+                <div class="timeline-line absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-gold via-purple-500 to-blue-500"></div>
+                
+                <!-- Timeline Items -->
+                <div class="timeline-item left" data-aos="zoom-in-down" data-aos-duration="1500" data-aos-anchor-placement="top-bottom">
+                    <div class="timeline-card card-3d star-origin bg-gradient-to-br from-pink-500/20 to-purple-500/20 backdrop-blur-md p-6 rounded-2xl border border-white/20 shadow-xl">
+                        <div class="card-inner">
+                            <span class="text-gold font-bold text-lg">👶 1995</span>
+                            <h3 class="text-2xl font-bold mt-2">The Day You Were Born</h3>
+                            <p class="text-gray-300 mt-2">The most beautiful day when our family was blessed with you. A bundle of joy that changed everyone's life forever!</p>
+                            <div class="mt-4 text-5xl">👶🍼💕</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item right" data-aos="zoom-in-down" data-aos-duration="1500" data-aos-anchor-placement="top-bottom">
+                    <div class="timeline-card card-3d star-origin bg-gradient-to-br from-blue-500/20 to-cyan-500/20 backdrop-blur-md p-6 rounded-2xl border border-white/20 shadow-xl">
+                        <div class="card-inner">
+                            <span class="text-gold font-bold text-lg">💒 2000</span>
+                            <h3 class="text-2xl font-bold mt-2">First Day of School</h3>
+                            <p class="text-gray-300 mt-2">Remember that tiny uniform and the big school bag? You were nervous but so brave. The beginning of your academic journey!</p>
+                            <div class="mt-4 text-5xl">📚✏️🎒</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item left" data-aos="zoom-in-down" data-aos-duration="1500" data-aos-anchor-placement="top-bottom">
+                    <div class="timeline-card card-3d star-origin bg-gradient-to-br from-green-500/20 to-emerald-500/20 backdrop-blur-md p-6 rounded-2xl border border-white/20 shadow-xl">
+                        <div class="card-inner">
+                            <span class="text-gold font-bold text-lg">🏆 2005</span>
+                            <h3 class="text-2xl font-bold mt-2">First Sports Victory</h3>
+                            <p class="text-gray-300 mt-2">That cricket match where you scored the winning runs! The whole family cheered, and you became our little champion!</p>
+                            <div class="mt-4 text-5xl">🏏🏆🥇</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item right" data-aos="zoom-in-down" data-aos-duration="1500" data-aos-anchor-placement="top-bottom">
+                    <div class="timeline-card card-3d star-origin bg-gradient-to-br from-orange-500/20 to-red-500/20 backdrop-blur-md p-6 rounded-2xl border border-white/20 shadow-xl">
+                        <div class="card-inner">
+                            <span class="text-gold font-bold text-lg">🎓 2013</span>
+                            <h3 class="text-2xl font-bold mt-2">High School Graduation</h3>
+                            <p class="text-gray-300 mt-2">Top of your class! Maa and Papa were so proud. You proved that hard work and dedication always pay off.</p>
+                            <div class="mt-4 text-5xl">🎓📜🌟</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item left" data-aos="zoom-in-down" data-aos-duration="1500" data-aos-anchor-placement="top-bottom">
+                    <div class="timeline-card card-3d star-origin bg-gradient-to-br from-purple-500/20 to-indigo-500/20 backdrop-blur-md p-6 rounded-2xl border border-white/20 shadow-xl">
+                        <div class="card-inner">
+                            <span class="text-gold font-bold text-lg">🏛️ 2017</span>
+                            <h3 class="text-2xl font-bold mt-2">College Graduation</h3>
+                            <p class="text-gray-300 mt-2">Engineering degree with flying colors! Four years of hard work, late nights, and you emerged as a brilliant engineer.</p>
+                            <div class="mt-4 text-5xl">👨‍🎓🎊💫</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item right" data-aos="zoom-in-down" data-aos-duration="1500" data-aos-anchor-placement="top-bottom">
+                    <div class="timeline-card card-3d star-origin bg-gradient-to-br from-yellow-500/20 to-amber-500/20 backdrop-blur-md p-6 rounded-2xl border border-white/20 shadow-xl">
+                        <div class="card-inner">
+                            <span class="text-gold font-bold text-lg">💼 2018</span>
+                            <h3 class="text-2xl font-bold mt-2">First Job</h3>
+                            <p class="text-gray-300 mt-2">Landing your dream job! You treated the whole family to dinner. That day, we saw not just success but your generous heart.</p>
+                            <div class="mt-4 text-5xl">💼🎉💰</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Festivals Section -->
+    <section id="festivals" class="py-20 relative overflow-hidden">
+        <!-- Semi-transparent overlay for readability -->
+        <div class="absolute inset-0 bg-gradient-to-r from-orange-900/20 via-red-900/20 to-yellow-900/20"></div>
+        <!-- Festival Decorations -->
+        <div class="absolute inset-0 opacity-20">
+            <div class="absolute top-10 left-10 text-6xl rotate-12">🪔</div>
+            <div class="absolute top-20 right-20 text-5xl -rotate-12">🎆</div>
+            <div class="absolute bottom-20 left-1/4 text-7xl">🎇</div>
+            <div class="absolute bottom-10 right-10 text-6xl rotate-45">🏮</div>
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <h2 class="font-dancing text-5xl md:text-6xl text-center text-gold mb-6" data-aos="fade-up">
+                Festival Celebrations 🎊
+            </h2>
+            <p class="text-center text-gray-300 mb-16 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+                Every festival becomes special when celebrated together. Here are our cherished festival memories!
+            </p>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Diwali Card -->
+                <div class="festival-card group" data-aos="flip-left" data-aos-duration="1000">
+                    <div class="card-3d-flip h-80">
+                        <div class="card-front bg-gradient-to-br from-orange-500 to-yellow-500 p-6 rounded-2xl flex flex-col items-center justify-center">
+                            <div class="text-8xl mb-4 animate-pulse">🪔</div>
+                            <h3 class="text-2xl font-bold text-white">Diwali</h3>
+                            <p class="text-white/80">Festival of Lights</p>
+                        </div>
+                        <div class="card-back bg-gradient-to-br from-orange-600 to-red-600 p-6 rounded-2xl flex flex-col items-center justify-center">
+                            <h3 class="text-xl font-bold mb-2">🎆 Diwali Memories</h3>
+                            <p class="text-center text-sm">Lighting diyas together, bursting crackers, and those delicious sweets Maa made! Remember when you taught me to make rangoli?</p>
+                            <div class="mt-4 text-3xl">🎇✨🍬</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Holi Card -->
+                <div class="festival-card group" data-aos="flip-left" data-aos-duration="1000" data-aos-delay="200">
+                    <div class="card-3d-flip h-80">
+                        <div class="card-front bg-gradient-to-br from-pink-500 via-purple-500 to-blue-500 p-6 rounded-2xl flex flex-col items-center justify-center">
+                            <div class="text-8xl mb-4">🎨</div>
+                            <h3 class="text-2xl font-bold text-white">Holi</h3>
+                            <p class="text-white/80">Festival of Colors</p>
+                        </div>
+                        <div class="card-back bg-gradient-to-br from-purple-600 to-pink-600 p-6 rounded-2xl flex flex-col items-center justify-center">
+                            <h3 class="text-xl font-bold mb-2">🌈 Holi Memories</h3>
+                            <p class="text-center text-sm">Water balloons, gulal fights, and that time you saved me from the neighborhood kids! Best Holi protector ever!</p>
+                            <div class="mt-4 text-3xl">💦🎭🥳</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Raksha Bandhan Card -->
+                <div class="festival-card group" data-aos="flip-left" data-aos-duration="1000" data-aos-delay="400">
+                    <div class="card-3d-flip h-80">
+                        <div class="card-front bg-gradient-to-br from-red-500 to-pink-500 p-6 rounded-2xl flex flex-col items-center justify-center">
+                            <div class="text-8xl mb-4">🎀</div>
+                            <h3 class="text-2xl font-bold text-white">Raksha Bandhan</h3>
+                            <p class="text-white/80">Bond of Protection</p>
+                        </div>
+                        <div class="card-back bg-gradient-to-br from-red-600 to-rose-600 p-6 rounded-2xl flex flex-col items-center justify-center">
+                            <h3 class="text-xl font-bold mb-2">💕 Rakhi Memories</h3>
+                            <p class="text-center text-sm">Every year, tying rakhi on your wrist and getting the best gifts! You're not just a brother, you're my superhero! 🦸‍♂️</p>
+                            <div class="mt-4 text-3xl">🎁💝🤝</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Eid Card -->
+                <div class="festival-card group" data-aos="flip-left" data-aos-duration="1000" data-aos-delay="600">
+                    <div class="card-3d-flip h-80">
+                        <div class="card-front bg-gradient-to-br from-green-500 to-emerald-500 p-6 rounded-2xl flex flex-col items-center justify-center">
+                            <div class="text-8xl mb-4">🌙</div>
+                            <h3 class="text-2xl font-bold text-white">Eid</h3>
+                            <p class="text-white/80">Festival of Joy</p>
+                        </div>
+                        <div class="card-back bg-gradient-to-br from-green-600 to-teal-600 p-6 rounded-2xl flex flex-col items-center justify-center">
+                            <h3 class="text-xl font-bold mb-2">☪️ Eid Memories</h3>
+                            <p class="text-center text-sm">Celebrating with friends, sharing sweets, and those beautiful moments of togetherness and harmony!</p>
+                            <div class="mt-4 text-3xl">🕌🍖🤗</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Christmas Card -->
+                <div class="festival-card group" data-aos="flip-left" data-aos-duration="1000" data-aos-delay="800">
+                    <div class="card-3d-flip h-80">
+                        <div class="card-front bg-gradient-to-br from-red-600 to-green-600 p-6 rounded-2xl flex flex-col items-center justify-center">
+                            <div class="text-8xl mb-4">🎄</div>
+                            <h3 class="text-2xl font-bold text-white">Christmas</h3>
+                            <p class="text-white/80">Season of Giving</p>
+                        </div>
+                        <div class="card-back bg-gradient-to-br from-red-700 to-green-700 p-6 rounded-2xl flex flex-col items-center justify-center">
+                            <h3 class="text-xl font-bold mb-2">🎅 Christmas Memories</h3>
+                            <p class="text-center text-sm">Decorating the tree together, exchanging gifts, and that time you dressed up as Santa for the kids!</p>
+                            <div class="mt-4 text-3xl">🎁⛄🔔</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- New Year Card -->
+                <div class="festival-card group" data-aos="flip-left" data-aos-duration="1000" data-aos-delay="1000">
+                    <div class="card-3d-flip h-80">
+                        <div class="card-front bg-gradient-to-br from-purple-500 to-blue-500 p-6 rounded-2xl flex flex-col items-center justify-center">
+                            <div class="text-8xl mb-4">🎆</div>
+                            <h3 class="text-2xl font-bold text-white">New Year</h3>
+                            <p class="text-white/80">New Beginnings</p>
+                        </div>
+                        <div class="card-back bg-gradient-to-br from-indigo-600 to-purple-600 p-6 rounded-2xl flex flex-col items-center justify-center">
+                            <h3 class="text-xl font-bold mb-2">🎉 New Year Memories</h3>
+                            <p class="text-center text-sm">Countdown together, watching fireworks, and making resolutions (that we never keep 😄)! Here's to many more!</p>
+                            <div class="mt-4 text-3xl">🥂🎊✨</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section id="achievements" class="py-20 relative overflow-hidden">
+        <!-- Background Stars -->
+        <div class="absolute inset-0">
+            <div class="stars-bg"></div>
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <h2 class="font-dancing text-5xl md:text-6xl text-center text-gold mb-6" data-aos="fade-up">
+                Achievements & Glory 🏆
+            </h2>
+            <p class="text-center text-gray-300 mb-16 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+                From school to college, you've always been our shining star! Here's a celebration of your amazing achievements.
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <!-- School Achievements -->
+                <div class="achievement-section" data-aos="zoom-in-right" data-aos-duration="1000">
+                    <div class="bg-gradient-to-br from-blue-900/50 to-purple-900/50 backdrop-blur-md p-8 rounded-3xl border border-gold/30 shadow-2xl">
+                        <div class="flex items-center mb-6">
+                            <div class="text-6xl mr-4">🏫</div>
+                            <h3 class="text-3xl font-bold text-gold">School Days</h3>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <div class="achievement-item flex items-center p-4 bg-white/5 rounded-xl hover:bg-white/10 transition-all duration-300 transform hover:scale-105">
+                                <span class="text-4xl mr-4">🥇</span>
+                                <div>
+                                    <h4 class="font-bold">School Topper - Class 10</h4>
+                                    <p class="text-sm text-gray-400">Scored 95% and made everyone proud!</p>
+                                </div>
+                            </div>
+                            
+                            <div class="achievement-item flex items-center p-4 bg-white/5 rounded-xl hover:bg-white/10 transition-all duration-300 transform hover:scale-105">
+                                <span class="text-4xl mr-4">🎯</span>
+                                <div>
+                                    <h4 class="font-bold">Science Olympiad Winner</h4>
+                                    <p class="text-sm text-gray-400">Gold medal at state level competition</p>
+                                </div>
+                            </div>
+                            
+                            <div class="achievement-item flex items-center p-4 bg-white/5 rounded-xl hover:bg-white/10 transition-all duration-300 transform hover:scale-105">
+                                <span class="text-4xl mr-4">🏏</span>
+                                <div>
+                                    <h4 class="font-bold">Cricket Team Captain</h4>
+                                    <p class="text-sm text-gray-400">Led school team to inter-school victory</p>
+                                </div>
+                            </div>
+                            
+                            <div class="achievement-item flex items-center p-4 bg-white/5 rounded-xl hover:bg-white/10 transition-all duration-300 transform hover:scale-105">
+                                <span class="text-4xl mr-4">🎭</span>
+                                <div>
+                                    <h4 class="font-bold">Best Actor - Annual Day</h4>
+                                    <p class="text-sm text-gray-400">Standing ovation for the Shakespeare play!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- College Achievements -->
+                <div class="achievement-section" data-aos="zoom-in-left" data-aos-duration="1000">
+                    <div class="bg-gradient-to-br from-purple-900/50 to-pink-900/50 backdrop-blur-md p-8 rounded-3xl border border-gold/30 shadow-2xl">
+                        <div class="flex items-center mb-6">
+                            <div class="text-6xl mr-4">🎓</div>
+                            <h3 class="text-3xl font-bold text-gold">College Glory</h3>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <div class="achievement-item flex items-center p-4 bg-white/5 rounded-xl hover:bg-white/10 transition-all duration-300 transform hover:scale-105">
+                                <span class="text-4xl mr-4">🌟</span>
+                                <div>
+                                    <h4 class="font-bold">University Gold Medalist</h4>
+                                    <p class="text-sm text-gray-400">Top of the batch with 9.5 CGPA!</p>
+                                </div>
+                            </div>
+                            
+                            <div class="achievement-item flex items-center p-4 bg-white/5 rounded-xl hover:bg-white/10 transition-all duration-300 transform hover:scale-105">
+                                <span class="text-4xl mr-4">💻</span>
+                                <div>
+                                    <h4 class="font-bold">Hackathon Champion</h4>
+                                    <p class="text-sm text-gray-400">Won national level coding competition</p>
+                                </div>
+                            </div>
+                            
+                            <div class="achievement-item flex items-center p-4 bg-white/5 rounded-xl hover:bg-white/10 transition-all duration-300 transform hover:scale-105">
+                                <span class="text-4xl mr-4">📝</span>
+                                <div>
+                                    <h4 class="font-bold">Research Paper Published</h4>
+                                    <p class="text-sm text-gray-400">International journal publication!</p>
+                                </div>
+                            </div>
+                            
+                            <div class="achievement-item flex items-center p-4 bg-white/5 rounded-xl hover:bg-white/10 transition-all duration-300 transform hover:scale-105">
+                                <span class="text-4xl mr-4">🎤</span>
+                                <div>
+                                    <h4 class="font-bold">College Fest Coordinator</h4>
+                                    <p class="text-sm text-gray-400">Successfully organized mega cultural fest</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trophy Animation -->
+            <div class="text-center" data-aos="zoom-in" data-aos-duration="1500">
+                <div class="trophy-3d inline-block">
+                    <div class="text-9xl animate-float">🏆</div>
+                </div>
+                <p class="text-2xl font-dancing text-gold mt-4">Always a Champion in Our Hearts!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Family & Friends Section -->
+    <section id="family" class="py-20 relative overflow-hidden">
+        <!-- Semi-transparent overlay -->
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-pink-900/10 to-transparent"></div>
+        <div class="container mx-auto px-6">
+            <h2 class="font-dancing text-5xl md:text-6xl text-center text-gold mb-6" data-aos="fade-up">
+                Family & Friends Forever 👨‍👩‍👧‍👦
+            </h2>
+            <p class="text-center text-gray-300 mb-16 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+                The moments we spend together are the most precious. Here's a tribute to our beautiful bond!
+            </p>
+
+            <!-- Photo Gallery Style Cards -->
+            <div class="grid md:grid-cols-3 gap-6 mb-12">
+                <div class="photo-card group relative overflow-hidden rounded-2xl aspect-square" data-aos="fade-up" data-aos-delay="100">
+                    <div class="absolute inset-0 bg-gradient-to-br from-red-500 to-pink-500 flex items-center justify-center">
+                        <div class="text-center p-6">
+                            <div class="text-7xl mb-4 group-hover:scale-125 transition-transform duration-500">👨‍👩‍👧‍👦</div>
+                            <h3 class="text-xl font-bold">Family Dinners</h3>
+                            <p class="text-sm text-white/80 mt-2">Those Sunday meals where we share stories and laughter!</p>
+                        </div>
+                    </div>
+                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <p class="text-center p-4">"No matter how far we go, Sunday dinners bring us home!" 💝</p>
+                    </div>
+                </div>
+
+                <div class="photo-card group relative overflow-hidden rounded-2xl aspect-square" data-aos="fade-up" data-aos-delay="200">
+                    <div class="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center">
+                        <div class="text-center p-6">
+                            <div class="text-7xl mb-4 group-hover:scale-125 transition-transform duration-500">🏖️</div>
+                            <h3 class="text-xl font-bold">Family Vacations</h3>
+                            <p class="text-sm text-white/80 mt-2">Adventures, road trips, and making memories!</p>
+                        </div>
+                    </div>
+                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <p class="text-center p-4">"The best journeys are the ones we take together!" 🌴</p>
+                    </div>
+                </div>
+
+                <div class="photo-card group relative overflow-hidden rounded-2xl aspect-square" data-aos="fade-up" data-aos-delay="300">
+                    <div class="absolute inset-0 bg-gradient-to-br from-green-500 to-teal-500 flex items-center justify-center">
+                        <div class="text-center p-6">
+                            <div class="text-7xl mb-4 group-hover:scale-125 transition-transform duration-500">🎮</div>
+                            <h3 class="text-xl font-bold">Gaming Nights</h3>
+                            <p class="text-sm text-white/80 mt-2">Those epic battles and friendly competitions!</p>
+                        </div>
+                    </div>
+                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <p class="text-center p-4">"You always let me win... or did you? 😏" 🎯</p>
+                    </div>
+                </div>
+
+                <div class="photo-card group relative overflow-hidden rounded-2xl aspect-square" data-aos="fade-up" data-aos-delay="400">
+                    <div class="absolute inset-0 bg-gradient-to-br from-yellow-500 to-orange-500 flex items-center justify-center">
+                        <div class="text-center p-6">
+                            <div class="text-7xl mb-4 group-hover:scale-125 transition-transform duration-500">🍕</div>
+                            <h3 class="text-xl font-bold">Late Night Snacks</h3>
+                            <p class="text-sm text-white/80 mt-2">Midnight kitchen raids and secret feasts!</p>
+                        </div>
+                    </div>
+                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <p class="text-center p-4">"Shh... Maa doesn't know about the maggi at 2 AM!" 🤫</p>
+                    </div>
+                </div>
+
+                <div class="photo-card group relative overflow-hidden rounded-2xl aspect-square" data-aos="fade-up" data-aos-delay="500">
+                    <div class="absolute inset-0 bg-gradient-to-br from-purple-500 to-indigo-500 flex items-center justify-center">
+                        <div class="text-center p-6">
+                            <div class="text-7xl mb-4 group-hover:scale-125 transition-transform duration-500">👬</div>
+                            <h3 class="text-xl font-bold">Friends Circle</h3>
+                            <p class="text-sm text-white/80 mt-2">The crazy gang and unforgettable moments!</p>
+                        </div>
+                    </div>
+                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <p class="text-center p-4">"Thanks for introducing me to your awesome friends!" 🤝</p>
+                    </div>
+                </div>
+
+                <div class="photo-card group relative overflow-hidden rounded-2xl aspect-square" data-aos="fade-up" data-aos-delay="600">
+                    <div class="absolute inset-0 bg-gradient-to-br from-pink-500 to-rose-500 flex items-center justify-center">
+                        <div class="text-center p-6">
+                            <div class="text-7xl mb-4 group-hover:scale-125 transition-transform duration-500">🤗</div>
+                            <h3 class="text-xl font-bold">Heart to Heart</h3>
+                            <p class="text-sm text-white/80 mt-2">Advice, support, and being there always!</p>
+                        </div>
+                    </div>
+                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <p class="text-center p-4">"You're not just my brother, you're my best friend!" 💖</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Message from Heart -->
+            <div class="max-w-3xl mx-auto text-center" data-aos="zoom-in" data-aos-duration="1500">
+                <div class="bg-gradient-to-r from-pink-500/20 via-purple-500/20 to-blue-500/20 backdrop-blur-md p-8 rounded-3xl border border-white/20 shadow-2xl">
+                    <div class="text-6xl mb-4 animate-pulse">💝</div>
+                    <h3 class="font-dancing text-4xl text-gold mb-4">A Message from the Heart</h3>
+                    <p class="text-lg text-gray-200 leading-relaxed">
+                        Dear Bhaiya, you've been my guide, my protector, and my best friend. 
+                        From teaching me to ride a bicycle to helping me with life decisions, 
+                        you've always been there. Thank you for being the best brother anyone could ask for!
+                    </p>
+                    <p class="text-2xl mt-4">With all my love ❤️</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final Birthday Message -->
+    <section id="final" class="py-20 relative overflow-hidden">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-4xl mx-auto">
+                <div class="birthday-cake-final text-9xl mb-8" data-aos="zoom-in">
+                    🎂
+                </div>
+                <h2 class="font-dancing text-6xl md:text-8xl text-gold mb-8 animate-glow" data-aos="fade-up" data-aos-delay="300">
+                    Happy Birthday, Bhaiya!
+                </h2>
+                <p class="text-2xl text-gray-200 mb-8" data-aos="fade-up" data-aos-delay="500">
+                    May this year bring you endless joy, success, and all the happiness you deserve!
+                </p>
+                
+                <!-- Wishes Counter -->
+                <div class="grid grid-cols-3 gap-6 max-w-2xl mx-auto mb-12" data-aos="fade-up" data-aos-delay="700">
+                    <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl">
+                        <div class="text-4xl font-bold text-gold counter" data-target="1000000">0</div>
+                        <p class="text-gray-300">Wishes</p>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl">
+                        <div class="text-4xl font-bold text-gold">∞</div>
+                        <p class="text-gray-300">Love</p>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl">
+                        <div class="text-4xl font-bold text-gold counter" data-target="100">0</div>
+                        <p class="text-gray-300">Years of Joy</p>
+                    </div>
+                </div>
+
+                <!-- Blow Candles Button -->
+                <button id="blow-candles" class="px-12 py-6 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 text-white text-2xl font-bold rounded-full transform hover:scale-110 transition-all duration-300 shadow-xl hover:shadow-pink-500/50 animate-pulse-slow" data-aos="fade-up" data-aos-delay="900">
+                    🎂 Blow the Candles! 🕯️
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 bg-black/30 backdrop-blur-md">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-gray-400">Made with 💖 for the Best Brother in the World</p>
+            <p class="text-gold font-dancing text-2xl mt-2">Happy Birthday Bhaiya! 🎉</p>
+            <div class="mt-4 text-3xl space-x-2">
+                <span class="hover:scale-150 inline-block transition-transform cursor-pointer">🎈</span>
+                <span class="hover:scale-150 inline-block transition-transform cursor-pointer">🎁</span>
+                <span class="hover:scale-150 inline-block transition-transform cursor-pointer">🎂</span>
+                <span class="hover:scale-150 inline-block transition-transform cursor-pointer">🎉</span>
+                <span class="hover:scale-150 inline-block transition-transform cursor-pointer">💖</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Background Music (optional - add your own mp3) -->
+    <audio id="bg-music" loop>
+        <source src="birthday-music.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
