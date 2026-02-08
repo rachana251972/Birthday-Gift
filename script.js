@@ -252,14 +252,32 @@ function initMusicToggle() {
     
     let isPlaying = false;
 
-    musicToggle.addEventListener('click', () => {
+    // Try to autoplay music
+    function tryAutoplay() {
+        bgMusic.play().then(() => {
+            isPlaying = true;
+            musicToggle.textContent = '🔇';
+        }).catch(() => {
+            // Autoplay blocked - will play on first interaction
+            document.addEventListener('click', function autoplayOnClick() {
+                bgMusic.play().then(() => {
+                    isPlaying = true;
+                    musicToggle.textContent = '🔇';
+                }).catch(() => {});
+                document.removeEventListener('click', autoplayOnClick);
+            }, { once: true });
+        });
+    }
+    
+    tryAutoplay();
+
+    musicToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
         if (isPlaying) {
             bgMusic.pause();
             musicToggle.textContent = '🎵';
         } else {
-            bgMusic.play().catch(() => {
-                console.log('Music playback requires user interaction');
-            });
+            bgMusic.play().catch(() => {});
             musicToggle.textContent = '🔇';
         }
         isPlaying = !isPlaying;
